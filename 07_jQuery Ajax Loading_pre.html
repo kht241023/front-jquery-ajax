@@ -78,15 +78,20 @@
 <script>
     let currentPage = 1;
     const apiUrlOne = 'https://picsum.photos/v2/list?limit=9';
-    const apiUrlTwo = `https://picsum.photos/v2/list?limit=9&page=${currentPage}`;
-    console.log("URL 값 : " + apiUrlTwo);
+    // const apiUrlTwo = `https://picsum.photos/v2/list?limit=9&page=${currentPage}`;
+    // loadImages () 함수 외부에 작성하면 currentPage 는 평생 1 값을 가짐.
+    //  console.log("URL 값 : " + apiUrlTwo);
     function loadImages() {
+        const apiUrlOne = 'https://picsum.photos/v2/list?limit=9';
+        const apiUrlTwo = `https://picsum.photos/v2/list?limit=9&page=${currentPage}`;
+        console.log("URL 값 : " + apiUrlTwo);
         $.ajax({
            // url: apiUrlOne,
             url: apiUrlTwo,
             method: "GET",
             success:
                 function (data) {
+                // $.each   $ = 객체 로 불러오겠다.
                     $.each(data, function (index, item) {
                         $('#gallery').append(
                            `
