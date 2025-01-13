@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>jQuery Ajax attr</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+<header>강아지 갤러리</header>
+<button id="loadDogs">강아지 사진 더 보기</button>
+<div class="gallery" id="galley"></div>
+<script>
+    // 함수에 loadDogs 이름을 붙이고, html 페이지가 실행되면 이미지가 자동으로 로딩이되면서,
+    // 강아지 사진 더 보기 버튼을 클릭했을 때 이미지가 추가될 수 있고, ajax가 작성된 함수 기능은 1번만 작성
+
+        function  loadDogs (){
+            $.ajax({
+                url:"https://api.thedogapi.com/v1/images/search?limit=10",
+                method:"GET",
+                success:
+                    function (data) {
+                        $.each(data, function (index, item) {
+                            $("#galley").append( $("<img>").attr("src", item.url) );
+                            $("#galley").append( $("<p>")  .text(item.url));
+
+                            $("#galley").append( $("<img>").attr("src", item.url) ).append( $("<p>")  .text(item.url));
+
+
+                            /*
+                            $("#galley").append(
+                                `<img src="${item.url}">
+                                 <p>URL : ${item.url}</p>
+                                `);
+                          */
+                        })
+                    },
+               error:
+                    function () {
+                        $("#gallery").text("<p>이미지를 불러오는데 실패했습니다. 다시 시도해주세요.</p>");
+                    }
+            })
+        }
+     // javascript 가 실행될 때 자동으로 function loadDogs 기능 실행
+    loadDogs();
+
+     // loadDogs 버튼을 클릭했을 때      function loadDogs 기능 실행
+    $("#loadDogs").click(
+        function (){
+            loadDogs();
+        }
+    )
+    //append
+    // 강아지 사진 불러오기 -> div gallery 에 img랑 text로 이미지 URL 보여주기 설정
+    // attr("src, 이미지
+    //
+    // url).show()
+    // .text
+</script>
+</body>
+</html>
