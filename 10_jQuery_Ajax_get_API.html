@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>get 을 이용해서 강아지 사진 가져오기</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+  <h1>강아지 사진 가져오기</h1>
+<button id="btnImg">강아지 이미지 가져오기</button>
+<div id="img-container"></div>
+
+<script>
+  //클릭했을 때 강아지사진 10장 가져오기
+  //https://api.thedogapi.com/v1/images/search?limit=10
+  $("#btnImg").click( function () {
+    $.ajax({
+      url:'https://api.thedogapi.com/v1/images/search?limit=10',
+      method:'GET',
+      success:
+              function (data) {
+                  $.each(data, function (index,value) {
+                    $("#img-container").append(`
+                            <img src=${value.url}>
+
+                    `)
+                  })
+              },
+      error:
+            function () {
+        $("#img-container").html("<p>이미지를 불러오지 못했습니다.</p>")
+            }
+    })
+  })
+  // ajax
+</script>
+</body>
+</html>
