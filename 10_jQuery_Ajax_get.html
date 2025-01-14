@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>jQuery Ajax get</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+<h1>오늘의 조언 받기</h1>
+<button id="getAdvice">조언받기</button>
+<p id="adviceText"><!-- 조언 내용이 보여질 공간 --></p>
+<script>
+    // 랜덤 조언 받는 기능 작성
+    function loadAdvice(){
+        $.get('https://api.adviceslip.com/advice', //url
+            /* data 생략 */
+            function (data) { // success 성공 후 Callback 보여줄 기능 설정
+                console.log("조언 : ", data);
+
+                $("#adviceText").text(data.slip.advice);
+                // adviceText text html append 상관없음
+                //조언 :  {"slip":
+                //          { "id": 63,
+                //            "advice": "If you're squashed close to strangers on public transport, try not to be rude to them. No one likes those situations."
+                //            }
+                //         }
+            }
+        )
+    }
+
+    loadAdvice();
+
+
+
+
+
+
+    /* jQuery에서 HTTP(GET, POST, PUT, DELETE 등)과 같은 요청을 보낼 때 사용되는 메서드
+    * .ajax()
+    *  HTTP 요청을 더 유연하고 상세하게 설정할 수 있는 메서드
+    *  헤더, 인증, 토큰 등 추가 설정 가능
+    *  요청이 성공했을 때 (success)와 실패했을 때 (error)의 처리도 별도 지정 가능
+    *  데이터 타입(dataType)과 요청 데이터 형식(contentType)을 더 자세하게 설정 가능
+    *
+    *
+    * .get()
+    *  HTTP GET 요청을 간단하게 보낼 때 사용
+    *  매개변수로 url, 데이터, 요청이 성공했을 때 실행될 콜백함수를 전달
+    *  데이터 타입을 지정할 수 있음 (예 : JSON, text 등)
+    *
+    *
+    * .post()
+    *  HTTP POST 요청을 간단하게 보낼 때 사용
+    *  GET 과 달리 서버에 데이터를 보낼 때 사용
+    *  주로 폼 데이터를 전송하거나 데이터 생성 요청을 보낼 때 사용
+    * 응답 처리도 간단히 가능
+    * */
+    /*
+    예제 .get()
+      url , data, successCallback, dataType 모두 생략가능하고, 하나만 작성해도 되지만
+      url , data, successCallback 은 get을 사용해서 데이터를 어디서 가져오고,
+      성공적으로 데이터를 가지고 왔다면 어떤 결과를 보여줄 것인가 작성하기 때문에
+      url과 successCallback 필수로 작성을 많이 해줌
+        $.get(url, data, successCallback, dataType);
+        $.get('/api/data', {id: 1}, function(data) {console.log(data)}, 'json');
+     */
+    /*
+    예제 .post()
+    서버에 데이터를 전송할 때 사용 데이터 생성 요청을 보낼 때 사용
+    데이터 서버 전송 성공 유무 보여줌
+    url              : 요청을 보낼 URL
+    data             : 서버로 보낼 데이터 객체
+    successCallback  : 요청 성공 시 실행할 콜백 함수
+    dataType         : 응답 데이터 형식 (json, xml, text 등)
+    $.post(url, data, successCallback, dataType);
+    $.post('/api/submit',
+            {nickname:'홍길동', age:20},
+            function (data){
+                    console.log(data + "서버에 전송 성공!");
+            },
+            'json'
+    );
+     */
+    /*    예제 .ajax()
+    헤더, 인증, 데이터 형식 등 세부 설정 가능
+    post put 의 경우 이미지 데이터를 보낼 경우 contentType 으로 파일형식 전송한다 설정
+    $.ajax({
+        url : 'api endpoint url 주소',
+        method : 'GET', // or 'POST', 'PUT', 'DELETE' 등
+        data : data,
+        success : function(){ //데이터 서버에서 가져오기 성공한 결과
+                    if( data > 0) { // 가져온 데이터가 1개 이상이면
+                    } else {        // 가져온 데이터가 없다면
+                    }
+                  },
+        error   : function () {
+                    console.log("데이터 가져오는데 문제가 발생했습니다." +
+                                "백엔드 연결 오류입니다.");
+                    }
+    })
+
+    type   은 jQuery 1.9.0 버전 대에 사용하던 설정 명칭
+    method 로        1.9.0 버전 이후 명칭 변경
+    되도록이면 type 대신 method 를 작성하는 것이 바람직함
+    $.ajax({
+        url : 'api endpoint url 주소',
+        type : 'GET', // or 'POST', 'PUT', 'DELETE' 등
+        data : data,
+        success : function(){ //데이터 서버에서 가져오기 성공한 결과
+            if( data > 0) { // 가져온 데이터가 1개 이상이면
+            } else {        // 가져온 데이터가 없다면
+            }
+        },
+        error   : function () {
+            console.log("데이터 가져오는데 문제가 발생했습니다." +
+                "백엔드 연결 오류입니다.");
+        }
+    })
+
+     */
+</script>
+</body>
+</html>
