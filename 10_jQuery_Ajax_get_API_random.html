@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>10_jQuery_Ajax_get_API_random</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
@@ -22,7 +23,10 @@
                                 $('#pokemonContainer').html(
                                     `
                                     <div class="pokemonInfo">
+                                    <!-- img src  showdown 아래에 있는 front_default 이미지 가져오기 -->
+                                    <!-- img src  showdown 아래에 있는 back_default 이미지 가져오기 -->
                                         <img src="${data.sprites.other.home.front_default}">
+                                        <img src="${back_front}">
                                         <h2>${data.name}</h2>
 
 
