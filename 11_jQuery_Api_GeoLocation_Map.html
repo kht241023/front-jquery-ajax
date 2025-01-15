@@ -84,21 +84,21 @@
                     //             숫자가   클 수록 건물이나 도로가 크게 보이고 주변에 보이는 것이 작아짐
                     if (!map) {
                         map = L.map('map').setView([lat, lng], 13);
-                        L.titleLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
                             {
                                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                             }).addTo(map);
                         // 마커 추가
                         // 위도 경도   [위도, 경도]
                         L.marker([lat, lng]).addTo(map).bindPopup('여기에 존재합니다.').openPopup();
-
-                        // 내 위치 정보를 화면에 표기
-                        $("#map").html(`
-
-                                <p>위도 : ${lat}</p>
-                                <p>경도 : ${lng}</p>
-                                <p>위치 정보를 확인했습니다.</p>
-                `)
+                        /*
+                    // 내 위치 정보를 화면에 표기
+                    $("#map").html(`
+                            <p>위도 : ${lat}</p>
+                            <p>경도 : ${lng}</p>
+                            <p>위치 정보를 확인했습니다.</p>
+                   `)
+                         */
                     } else {
                         alert('브라우저에서 위치 서비스를 지원하지 않습니다. ')
                     }
